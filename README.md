@@ -1,10 +1,7 @@
 ckanext-ga-report
 =================
 
-**Status:** In current use (data.gov.uk)
-
 **CKAN Version:** 1.7.1+
-
 
 Overview
 --------
@@ -61,7 +58,7 @@ Installation
 1. Activate you CKAN python environment and install this extension's software:
 ```
 $ pyenv/bin/activate
-$ pip install -e  git+https://github.com/datagovuk/ckanext-ga-report.git#egg=ckanext-ga-report
+$ pip install -e  git+https://github.com/CivicActions/ckanext-ga-report.git#egg=ckanext-ga-report
 ```
 
 2. Install dependencies (e.g. Google's python client library):
@@ -149,6 +146,7 @@ Before you can access the data, you need to create an OAUTH token of type "Insta
 
     googleanalytics.token.filepath = ~/pyenv/token.dat
 
+15. You may need to enable GA API (if not already enabled) https://console.developers.google.com/apis/api/analytics.googleapis.com/overview
 
 Tutorial
 --------

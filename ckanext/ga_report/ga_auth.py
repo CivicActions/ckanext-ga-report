@@ -88,4 +88,3 @@ def get_profile_id(service):
 
     log.debug('GA Property %s has GA Profile id: %s', webPropertyId, profileId)
     return profileId
-

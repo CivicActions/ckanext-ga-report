@@ -5,7 +5,8 @@ import json
 import logging
 import operator
 import collections
-from ckan.lib.base import (BaseController, c, g, render, request, response, abort)
+from ckan.lib.base import BaseController, render, abort
+from ckan.common import c, g, request, response
 
 import sqlalchemy
 from sqlalchemy import func, cast, Integer
@@ -100,7 +101,7 @@ class GaReport(BaseController):
             c.month_desc = ''.join([m[1] for m in c.months if m[0]==c.month])
 
         q = model.Session.query(GA_Stat).\
-            filter(GA_Stat.stat_name=='Totals')	   
+            filter(GA_Stat.stat_name=='Totals')
         if c.month != 'all_months':
             q = q.filter(GA_Stat.period_name==c.month)
         entries = q.order_by('ga_stat.key').all()
@@ -119,7 +120,7 @@ class GaReport(BaseController):
 
             return key, val
 
-        c.global_totals = []	
+        c.global_totals = []
         if c.month != 'all_months':
             for e in entries:
                 key, val = clean_key(e.key, e.value)
@@ -145,7 +146,7 @@ class GaReport(BaseController):
                 return total_order.index(key)
             return 999
         c.global_totals = sorted(c.global_totals, key=sort_func)
-	
+
         keys = {
             'Browser versions': 'browser_versions',
             'Browsers': 'browsers',
@@ -244,7 +245,7 @@ class GaReport(BaseController):
 
         q = model.Session.query(GA_Stat).\
             filter(GA_Stat.stat_name=='Totals')
-	
+
         if c.month:
             q = q.filter(GA_Stat.period_name==c.month)
         entries = q.order_by('ga_stat.key').all()
@@ -371,8 +372,8 @@ class GaReport(BaseController):
             for key, val in d.iteritems():
                 entries.append((key,val,))
             entries = sorted(entries, key=operator.itemgetter(1), reverse=True)
-	   
-            #convert data to be used for bar and pie charts 
+
+            #convert data to be used for bar and pie charts
             chart_entries = map(convert_for_chart, entries)[:20]
             setattr(c, v+'_chart', json.dumps(chart_entries))
 
@@ -475,7 +476,7 @@ class GaDatasetReport(BaseController):
         setattr(c, 'publisher_chart', json.dumps(chart_entries))
 
         return render('ga_report/organization/organization_month.html')
-	
+
     def organizations(self):
         '''A list of publishers and the number of views/visits for each'''
 
@@ -645,7 +646,7 @@ class GaDatasetReport(BaseController):
         setattr(c, 'dataset_chart', json.dumps(chart_entries))
 
         return render('ga_report/organization/dataset_month.html')
-	
+
 def _to_rickshaw(data, percentageMode=False):
     if data==[]:
         return data
@@ -702,7 +703,7 @@ def _get_top_publishers(limit=50):
     month = c.month or 'All'
     connection = model.Session.connection()
     q = """
-        select department_id, sum(pageviews::int) views, sum(visits::int) visits
+        select department_id, sum(pageviews::int) as views, sum(visits::int) visits
         from ga_url
         where department_id <> ''
           and package_id <> ''
@@ -728,7 +729,7 @@ def _get_top_publishers_graph(limit=50):
     '''
     connection = model.Session.connection()
     q = """
-        select department_id, sum(pageviews::int) views
+        select department_id, sum(pageviews::int) as views
         from ga_url
         where department_id <> ''
           and package_id <> ''

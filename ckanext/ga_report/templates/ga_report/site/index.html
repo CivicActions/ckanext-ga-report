@@ -4,15 +4,13 @@
 {% block title %}Site Usage - {{ super() }}{% endblock %}
 
 {% block header %}
-  {% include 'header-site-usage.html' %}
-  <script  src="https://code.jquery.com/jquery-1.3.min.js" integrity="sha256-kAGRpEMRXYtIqdaNMGLos9cSlyeVG4YXRltIW68lMAY=" crossorigin="anonymous"></script> 
+  <script  src="https://code.jquery.com/jquery-1.3.min.js" integrity="sha256-kAGRpEMRXYtIqdaNMGLos9cSlyeVG4YXRltIW68lMAY=" crossorigin="anonymous"></script>
   {% resource 'scripts/scripts/ajax.js' %}
   {% resource 'scripts/scripts/d3.js' %}
   {% resource 'scripts/scripts/chart.js' %}
   {% resource 'scripts/scripts/nav.js' %}
   {% resource 'scripts/css/chart.css' %}
   {% resource 'scripts/css/nav.css' %}
-  {% include 'metrics-subnav.html' %}
 {% endblock %}
 
 
@@ -122,7 +120,7 @@
 	  barChart({{c.page_views_chart|safe}},'Most Popular Pages','views',"#chart1",true)
 	});
 	</script>
-	<br>	
+	<br>
         <table class="col-sm-12 ga-reports-table table table-condensed table-bordered table-striped">
           <tr>
             <th>Page</th>
@@ -428,7 +426,7 @@
           {{m.month_selector(c.month, c.months, c.day)}}
         </form>
           {{m.stat_table(c.os_versions)}}
-      </div> 
+      </div>
       <div class="tabcontent" id="social_referrals_totals">
         <p>*Number of visits that were referred from social networks</p>
         <form class="form-inline" action=""{h.url_for(controller='ckanext.ga_report.controller:GaReport',action='index')}"" method="get">
@@ -443,7 +441,7 @@
         });
         </script>
         {{m.social_table(c.social_referrer_totals)}}
-      </div> 
+      </div>
       <div class="" id="Referral Paths">
         <h2>Referral Paths</h2>
         <p>Percentage of visits that were referred from these social networks</p>
@@ -463,7 +461,7 @@
           </tr>
           {% endfor %}
       </table>
-      </div>  
+      </div>
       <div class="tabcontent" id="social_networks">
 	<h1 class="titles">Social Networks Referal Percentages</h1>
         <p>Percentage of visits that were referred from these social networks</p>
@@ -697,5 +695,5 @@
         <td><a style="text-decoration:none;color:black;" data-toggle="tooltip" data-title="The number of times a search result page was viewed">searchResultViews</a></td>
       </tr>
     </table>
-  {% endblock %} 
+  {% endblock %}
 {% endblock %}

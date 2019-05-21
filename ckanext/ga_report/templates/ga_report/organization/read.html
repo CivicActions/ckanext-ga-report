@@ -4,14 +4,12 @@
 {% block title %}Usage by Dataset - {{ super() }}{% endblock %}
 
 {% block header %}
-  {% include 'header-site-usage.html' %}
   <script  src="https://code.jquery.com/jquery-1.3.min.js" integrity="sha256-kAGRpEMRXYtIqdaNMGLos9cSlyeVG4YXRltIW68lMAY=" crossorigin="anonymous"></script>
   {% resource 'scripts/scripts/ajax.js' %}
   {% resource 'scripts/scripts/d3.js' %}
   {% resource 'scripts/scripts/chart.js' %}
   {% resource 'scripts/css/chart.css' %}
   {% resource 'scripts/css/nav.css' %}
-  {% include 'metrics-subnav.html' %}
 {% endblock %}
 
 {% block breadcrumb_content %}
@@ -23,7 +21,7 @@
     {% else %}
       <li><a href="{{request.url}}">Usage By Dataset</a></li>
     {% endif %}
-    <a href="{{download_link}}" class="btn btn-info download_button"><i class="icon-download"></i>&nbsp; Download CSV</a>	
+    <a href="{{download_link}}" class="btn btn-info download_button"><i class="icon-download"></i>&nbsp; Download CSV</a>
 {% endblock %}
 
 {% block page_header %}
@@ -78,4 +76,3 @@
     </section>
   {% endblock %}
 {% endblock %}
-
