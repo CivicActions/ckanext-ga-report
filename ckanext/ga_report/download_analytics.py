@@ -248,7 +248,6 @@ class DownloadAnalytics(object):
 	    count = count + 1
             if count == 100:
                 break
-	data = self._edit_url(data)
         ga_model.update_social(period_name, data)
 
     def download(self, start_date, end_date, path=None):
@@ -372,10 +371,6 @@ class DownloadAnalytics(object):
         # allow any exceptions to bubble up
 
         data_dict = response.json()
-        log.error(params)
-        log.error(">>>>>>>>>>>>>>>>>>>>>>>>>>")
-        log.error(data_dict)
-
         # If there are 0 results then the rows are missed off, so add it in
         if 'rows' not in data_dict:
             data_dict['rows'] = []
@@ -867,7 +862,6 @@ class DownloadAnalytics(object):
                 break
 
         self._filter_out_long_tail(data, MIN_VIEWS)
-        data = self._edit_url(data)
         ga_model.update_sitewide_stats(period_name, "Page views", data, period_complete_day)
 
         data = {}
@@ -878,7 +872,7 @@ class DownloadAnalytics(object):
             if count == 100:
                 break
         self._filter_out_long_tail(data, MIN_VIEWS)
-        data = self._edit_url(data)
+
         ga_model.update_sitewide_stats(period_name, "Page avgTime", data, period_complete_day)
 
         try:
@@ -907,7 +901,7 @@ class DownloadAnalytics(object):
             if count == 100:
                 break
         self._filter_out_long_tail(data, MIN_VIEWS)
-        data = self._edit_url(data)
+
         ga_model.update_sitewide_stats(period_name, "Landing page", data, period_complete_day)
 
         try:
@@ -936,7 +930,7 @@ class DownloadAnalytics(object):
             if count == 100:
                 break
         self._filter_out_long_tail(data, MIN_VIEWS)
-        data = self._edit_url(data)
+
         ga_model.update_sitewide_stats(period_name, "Exit page", data, period_complete_day)
 
         try:
@@ -964,7 +958,7 @@ class DownloadAnalytics(object):
             if count == 100:
                 break
         self._filter_out_long_tail(data, MIN_VIEWS)
-        data = self._edit_url(data)
+
         ga_model.update_sitewide_stats(period_name, "Second page", data, period_complete_day)
 
         try:
@@ -992,7 +986,7 @@ class DownloadAnalytics(object):
             if count == 100:
                 break
         self._filter_out_long_tail(data, MIN_VIEWS)
-        data = self._edit_url(data)
+
         ga_model.update_sitewide_stats(period_name, "Third page", data, period_complete_day)
 
         try:
@@ -1020,7 +1014,7 @@ class DownloadAnalytics(object):
             if count == 100:
                 break
         self._filter_out_long_tail(data, MIN_VIEWS)
-        data = self._edit_url(data)
+
         ga_model.update_sitewide_stats(period_name, "Time on page", data, period_complete_day)
 
     @classmethod
@@ -1119,7 +1113,6 @@ class DownloadAnalytics(object):
         for result in result_data:
             data[result[0]] = data.get(result[0], 0) + int(result[1])
         self._filter_out_long_tail(data, MIN_VIEWS)
-	data = self._edit_url(data)
         ga_model.update_sitewide_stats(period_name, "Search destination page", data, period_complete_day)
     @classmethod
     def _filter_out_long_tail(cls, data, threshold=10):
